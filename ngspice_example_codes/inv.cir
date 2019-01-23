@@ -1,0 +1,30 @@
+* inverter characteristics
+
+* include the model files
+.include ./t14y_tsmc_025_level3.txt
+  
+* netlist
+* m_instance_name drain_node gate_node source_node bulk_substrate_node model_name L=length W=width
+m1 out in vss 0 cmosn l=180n w=1540n 
+m2 out in vdd vdd cmosp l=180n w=720n
+
+
+* power sources excitation etc.
+* v_instance_name posive_node negetive_node value
+v_dd vdd 0 3.3
+v_0 vss 0 0
+*v_in in 0 3.3
+v_in in 0 pulse(0 3.3 0 0.1n 0.1n 50n 100n)
+cl out 0 1p
+.control
+tran 0.1n 200n
+run
+setplot tran1
+plot -v_dd#branch
+plot in out
+dc v_in 0 3.3 0.1 
+run
+setplot dc1
+plot -v_dd#branch
+plot in out
+.endc

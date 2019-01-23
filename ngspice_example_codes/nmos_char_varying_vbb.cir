@@ -1,0 +1,29 @@
+* nmos characteristics with varying VBB
+
+
+.include ./t14y_tsmc_025_level3.txt
+  
+m1 drain gate source bulk cmosn l=1u w=0.5u 
+
+vdd drain 0 3.3
+vin gate 0 3.3
+vss source 0 0
+vbb bulk 0 3.3
+
+.dc vin 0 3.3 0.1
+
+.control
+foreach vb -2 -1 0 1 2
+alter vbb=$vb
+run
+end
+.endc
+
+.control
+foreach iter1 1 2 3 4 5
+setplot dc$iter1
+plot (-vdd#branch)  (-vbb#branch)
+end
+.endc
+
+.end

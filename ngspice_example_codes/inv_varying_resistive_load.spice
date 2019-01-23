@@ -1,0 +1,40 @@
+* inverter with discrete resistor load; load mosfet width being changed.
+
+m0 out in vss 0 nfet w=6.4u l=1.8u ad=6.84p pd=10.8u as=6.84p ps=10.8u
+r0 vdd out 1k
+
+.MODEL nfet NMOS LEVEL=3 PHI=0.700000 TOX=3.0600E-08 XJ=0.200000U TPG=1 VTO=0.5666 DELTA=8.7630E-01 LD=9.0910E-10 KP=7.7684E-05 UO=688.4 THETA=1.1640E-01 RSH=1.0310E+01 GAMMA=0.5904 NSUB=1.3370E+16 NFS=5.9090E+11 VMAX=1.9740E+05 ETA=9.3470E-02 KAPPA=2.1020E-01 CGDO=5.0000E-11 CGSO=5.0000E-11 CGBO=3.1008E-10 CJ=2.7477E-04 MJ=5.5020E-01 CJSW=1.9263E-10 MJSW=1.0000E-01 PB=9.9000E-01
+
+* supply voltages
+Vgnd vss 0 dc 0
+Vdd Vdd 0 dc 5
+
+* input voltage source:
+Vin in 0 dc 2.5 pulse(0 5 1n 0.1n 0.1n 2n 4n) 
+
+* analysis request
+*.dc vin 0 5 0.004
+.tran 0.01ns 4n
+
+* computing the response for various widths
+.control
+foreach res 100 1k 100k 
+alter r0 = $res
+run
+end
+.endc
+
+* plotting the output for various widths
+.control
+foreach iter 1 2 3
+*setplot dc$iter
+*plot in out
+*plot -vdd#branch
+setplot tran$iter
+plot in out
+plot -vdd#branch
+end
+.endc
+
+.end
+ 

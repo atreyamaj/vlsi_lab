@@ -1,0 +1,19 @@
+* rc simulation
+
+*rc time constant = 1ms
+r0 in out 1
+c0 out 0 1m
+
+Vin in 0 PULSE(0 1 1n 0.001ns 0.001ns 1 2)
+*Vsrc in1 0 dc 2.5
+
+.op
+
+.control
+tran 0.1ms 10ms
+setplot tran1
+plot -vin#branch
+plot in out out-in
+.endc
+
+.end

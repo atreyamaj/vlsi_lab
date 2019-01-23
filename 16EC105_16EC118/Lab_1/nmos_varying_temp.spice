@@ -1,0 +1,47 @@
+* NMOS characteristics - varying temperature works fine.
+
+.include ./t14y_tsmc_025_level3.txt
+
+m0 drain gate 0 0 cmosn w=6.4u l=1.8u ad=6.84p pd=10.8u as=6.84p ps=10.8u
+
+
+*
+*.MODEL nfet nmos LEVEL=1 
+*
+
+* supply voltages
+Vdd drain 0 dc 5
+Vgg gate 0 dc 5
+
+*
+* analysis request
+.dc vgg 0 5 0.1 vdd 0 5 1
+.dc vdd 0 5 0.1 vgg 0 5 1
+
+.control
+run
+setplot dc1
+plot -vdd#branch
+setplot dc2
+plot -vdd#branch
+showmod m0
+
+set temp=50
+run
+setplot dc3
+plot -vdd#branch
+setplot dc4
+plot -vdd#branch
+showmod m0
+
+set temp=100
+run
+setplot dc5
+plot -vdd#branch
+setplot dc6
+plot -vdd#branch
+showmod m0
+
+.endc
+.end
+ 

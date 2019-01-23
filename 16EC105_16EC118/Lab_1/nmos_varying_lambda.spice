@@ -1,0 +1,41 @@
+* nmos charecteristics varying lambda
+
+.include ./t14y_tsmc_025_level1.txt
+
+* spice netlist
+m1 drain gate 0 0 RITSUBN1 l=3u w=10u
+
+
+* excitation sources (supply voltages, stimulus etc)
+vdd drain 0 dc 5
+vgg gate 0 dc 5
+
+
+* desired responses
+.dc vdd 0 5 0.1 vgg 0 5 1
+*.dc vgg 0 5 0.1 vdd 0 5 1
+
+* computing the response for various widths
+.control
+foreach lam 0.01 0.03 0.07 0.13
+* can use any one of the 2 lines below. Both of them give the same result
+*alter @m1[w] = $wid
+
+altermod m1 LAMBDA = $lam
+run
+end
+.endc
+
+* plotting the output for various widths
+.control
+foreach iter 1 2 3 4
+setplot dc$iter
+plot -vdd#branch
+end 
+.endc
+
+.control
+set filetype=ascii
+write output.txt 
+.endc
+.end

@@ -1,0 +1,29 @@
+* nmos characteristics
+
+.include ./t14y_tsmc_025_level3.txt
+  
+* netlist
+* m_instance_name drain_node gate_node source_node bulk_substrate_node model_name L=length W=width
+*m1 vdd in vss 0 cmosn l=1u w=0.5u 
+m1 vdd in 0 0 cmosn l=1u w=0.5u 
+
+* power sources excitation etc.
+* v_instance_name posive_node negetive_node value
+v_dd vdd 0 3.3 
+v_in in 0 3.3 
+
+
+.control
+dc v_in 0 3.3 0.1 v_dd 0 3.3  1
+run
+setplot dc1
+plot -v_dd#branch
+
+dc v_dd 0 3.3 .1 v_in 0 3.3  1
+run
+setplot dc2
+plot -v_dd#branch
+
+.endc
+
+.end

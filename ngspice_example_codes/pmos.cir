@@ -1,0 +1,15 @@
+******************PMOS CHARACTERISTICS**************************
+.include t14y_tsmc_025_level3.txt
+M1  0 vin vss vss CMOSP l=0.5u w=2u
+v_ss vss 0 3.3
+v_in vin 0 -3.3
+.control
+dc v_in -3.3 0 0.1
+dc v_ss -3.3 0 0.1
+run
+setplot dc1
+plot -v_ss#branch
+setplot dc2
+plot -v_ss#branch
+.endc
+.end

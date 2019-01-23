@@ -1,0 +1,39 @@
+* nmos charecteristics varying VSB(VBB)
+
+.include ./t14y_tsmc_025_level3.txt
+
+* spice netlist
+m1 drain gate 0 bulk cmosn l=3u w=10u
+
+
+* excitation sources (supply voltages, stimulus etc)
+vdd drain 0 dc 5
+vgg gate 0 dc 5
+vbb bulk 0 dc 0
+
+* desired responses
+.dc vdd 0 5 0.1 vgg 0 5 1
+
+
+* computing the response for various widths
+.control
+foreach vbulk -2 -1 0 1 2
+alter vbb = $vbulk
+run
+end
+.endc
+
+* plotting the output for various widths
+.control
+foreach iter 1 2 3 4 5
+setplot dc$iter
+plot -vdd#branch 
+plot -vbb#branch
+end 
+.endc
+
+.control
+set filetype=ascii
+write output.txt 
+.endc
+.end
