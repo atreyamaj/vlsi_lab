@@ -1,0 +1,81 @@
+* Inverter using a NMOS Transistor
+
+.include ./t14y_tsmc_025_level3.txt
+
+* NET List
+* m0 drain gate source bulk
+m0 out in 0 0 cmosn l=2.5u w=10u
+rl supply out 7k
+cl out 0 5n
+
+* source
+vdd supply 0 dc 3.3
+vin in 0 dc 3.3 pulse(0 3.3 0 0.1n 0.1n 0.5m 1m)
+
+.control
+foreach len 1u 2.5u 10u 
+alter @m0[l] = $len
+
+tran 0.1m 4m
+
+dc vin 0 3.3 0.01
+
+meas dc vol find out when in=3.29
+let slope=deriv(out)
+let voh=3.3
+meas dc vih find in when slope=-1 cross=2
+meas dc vil find in when slope=-1 cross=1
+
+let v90 = voh-0.1*(voh-vol)
+let v10 = vol+0.1*(voh-vol)
+let vhalf = voh-0.5*(voh-vol)
+
+end
+
+plot dc1.out dc2.out dc3.out
+plot deriv(dc1.out) deriv(dc2.out) deriv(dc3.out)
+
+
+setplot tran1
+plot in out
+*plot -vdd#branch
+meas tran trise trig out val=dc1.v10 rise=1 targ out val=dc1.v90 rise=1
+meas tran tfall trig out val=dc1.v90 fall=1 targ out val=dc1.v10 fall=1
+
+meas tran tlh trig in val=1.65 fall=1 targ out val=dc1.vhalf rise=1
+meas tran thl trig in val=1.65 rise=1 targ out val=dc1.vhalf fall=1
+let td = 0.5*(thl+tlh)
+
+let power = -3.3*vdd#branch
+meas tran pavg AVG power from=0m to=2m 
+
+
+setplot tran2
+plot in out
+*plot -vdd#branch
+meas tran trise trig out val=dc2.v10 rise=1 targ out val=dc2.v90 rise=1
+meas tran tfall trig out val=dc2.v90 fall=1 targ out val=dc2.v10 fall=1
+
+meas tran tlh trig in val=1.65 fall=1 targ out val=dc2.vhalf rise=1
+meas tran thl trig in val=1.65 rise=1 targ out val=dc2.vhalf fall=1
+let td = 0.5*(thl+tlh)
+
+let power = -3.3*vdd#branch
+meas tran pavg AVG power from=0m to=2m 
+
+
+setplot tran3
+plot in out
+*plot -vdd#branch
+meas tran trise trig out val=dc3.v10 rise=1 targ out val=dc3.v90 rise=1
+meas tran tfall trig out val=dc3.v90 fall=1 targ out val=dc3.v10 fall=1
+
+meas tran tlh trig in val=1.65 fall=1 targ out val=dc3.vhalf rise=1
+meas tran thl trig in val=1.65 rise=1 targ out val=dc3.vhalf fall=1
+let td = 0.5*(thl+tlh)
+
+let power = -3.3*vdd#branch
+meas tran pavg AVG power from=0m to=2m 
+.endc
+
+.end
