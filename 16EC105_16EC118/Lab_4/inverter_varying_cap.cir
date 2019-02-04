@@ -4,10 +4,9 @@
 
 * NET List
 * m0 drain gate source bulk
-m0 out in 0 0 cmosn l=0.25u w=25u
-m1 out 0 supply supply cmosp l=0.25u w=22u
+m0 out in 0 0 cmosn l=0.25u w=10u
+m1 out in supply supply cmosp l=0.25u w=31u
 cl out measure 5n
-
 * source
 vdd supply 0 dc 3.3
 vin in 0 dc 3.3 pulse(0 3.3 0 0.1n 0.1n 0.5m 1m)
@@ -15,7 +14,7 @@ vcap measure 0 dc 0
 
 
 .control
-foreach cap 5n 25n
+foreach cap 5n 50n
 alter cl = $cap
 
 dc vin 0 3.3 0.001

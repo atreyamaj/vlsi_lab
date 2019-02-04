@@ -4,8 +4,8 @@
 
 * NET List
 * m0 drain gate source bulk
-m0 out in 0 0 cmosn l=0.25u w=25u
-m1 out 0 supply supply cmosp l=0.25u w=22u
+m0 out in 0 0 cmosn l=0.25u w=10u
+m1 out in supply supply cmosp l=0.25u w=31u
 cl out measure 5n
 
 * source
@@ -15,7 +15,7 @@ vcap measure 0 dc 0
 
 
 .control
-foreach wi 10u 22u
+foreach wi 10u 31u
 alter @m1[w] = $wi
 
 dc vin 0 3.3 0.001
@@ -42,6 +42,8 @@ let td = 0.5*(thl+tlh)
 
 let power = -3.3*vdd#branch
 meas tran pavg AVG power from=0m to=2m 
+let pcap = 3.3*abs(vcap#branch)
+meas tran pdyn AVG pcap from=0m to=2m
 end
 
 setplot dc1
