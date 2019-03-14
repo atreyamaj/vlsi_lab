@@ -1,0 +1,33 @@
+* SPICE3 file created from nor.ext - technology: scmos
+
+.include /home/vlsilab/UG_students_2018/t14y_tsmc_025_level3.txt
+
+M1000 p1 A vdd vdd cmosp w=16u l=2u
++  ad=144p pd=50u as=144p ps=50u
+M1001 out B p1 vdd cmosp w=16u l=2u
++  ad=72p pd=44u as=0p ps=0u
+M1002 gnd A out Gnd cmosn w=4u l=2u
++  ad=40p pd=28u as=44p ps=38u
+M1003 out B gnd Gnd cmosn w=4u l=2u
++  ad=0p pd=0u as=0p ps=0u
+C0 B vdd 2.86fF
+C1 vdd A 2.86fF
+C2 gnd Gnd 2.54fF
+C3 out Gnd 8.60fF
+C4 B Gnd 7.14fF
+C5 A Gnd 7.14fF
+C6 vdd Gnd 3.81fF
+
+gd gnd 0 0
+v_dd vdd 0 3.3
+
+vin_a A 0 PULSE(0 3.3 0ns 2ns 2ns 20ns 44ns)
+vin_b B 0 PULSE(0 3.3 0ns 2ns 2ns 25ns 54ns)
+
+.control
+tran 0.1ns 200ns
+run
+plot (out) (0.5*A) (0.25*B)
+.endc
+
+.end

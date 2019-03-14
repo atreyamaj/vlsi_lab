@@ -1,0 +1,72 @@
+* SPICE3 file created from dlatch.ext - technology: scmos
+
+.include /home/vlsilab/UG_students_2018/t14y_tsmc_025_level3.txt
+
+M1000 D_bar D vdd vdd cmosp w=6u l=2u
++  ad=120p pd=52u as=546p ps=242u
+M1001 vdd D out_n1 vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=108p ps=60u
+M1002 out_n1 en vdd vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=0p ps=0u
+M1003 vdd en out_n2 vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=108p ps=60u
+M1004 out_n2 D_bar vdd vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=0p ps=0u
+M1005 vdd out_n1 q vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=108p ps=60u
+M1006 q q_bar vdd vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=0p ps=0u
+M1007 vdd out_n2 q_bar vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=108p ps=60u
+M1008 q_bar q vdd vdd cmosp w=6u l=2u
++  ad=0p pd=0u as=0p ps=0u
+M1009 D_bar D gnd Gnd cmosn w=3u l=2u
++  ad=67p pd=50u as=289p ps=166u
+M1010 n1 D gnd Gnd cmosn w=6u l=2u
++  ad=114p pd=50u as=0p ps=0u
+M1011 out_n1 en n1 Gnd cmosn w=6u l=2u
++  ad=48p pd=28u as=0p ps=0u
+M1012 n2 en gnd Gnd cmosn w=6u l=2u
++  ad=114p pd=50u as=0p ps=0u
+M1013 out_n2 D_bar n2 Gnd cmosn w=6u l=2u
++  ad=48p pd=28u as=0p ps=0u
+M1014 n3 out_n1 gnd Gnd cmosn w=6u l=2u
++  ad=114p pd=50u as=0p ps=0u
+M1015 q q_bar n3 Gnd cmosn w=6u l=2u
++  ad=48p pd=28u as=0p ps=0u
+M1016 n4 out_n2 gnd Gnd cmosn w=6u l=2u
++  ad=114p pd=50u as=0p ps=0u
+M1017 q_bar q n4 Gnd cmosn w=6u l=2u
++  ad=48p pd=28u as=0p ps=0u
+
+C0 vdd en 7.15fF
+C1 vdd D_bar 4.56fF
+C2 vdd q 9.21fF
+C3 vdd q_bar 9.21fF
+C4 out_n1 out_n2 3.62fF
+C5 vdd out_n2 9.21fF
+C6 vdd out_n1 9.99fF
+C7 vdd D 7.15fF
+C8 gnd Gnd 38.63fF
+C9 q Gnd 14.70fF
+C10 out_n2 Gnd 19.67fF
+C11 q_bar Gnd 7.80fF
+C12 out_n1 Gnd 17.19fF
+C13 D_bar Gnd 17.94fF
+C14 en Gnd 5.32fF
+C15 D Gnd 19.34fF
+C16 vdd Gnd 41.74fF
+
+gd gnd 0 0
+v_dd vdd 0 5
+
+v_ind D 0 PULSE(0 5 0n 0.1n 0.1n 50ns 100ns)
+v_inen en 0 PULSE(0 5 0n 0.1n 0.1n 40ns 80ns)
+
+.control
+tran 0.1ns 300ns
+run
+plot (q) (0.5*D) (0.25*en)
+.endc
+
+.end

@@ -1,0 +1,39 @@
+* SPICE3 file created from or.ext - technology: scmos
+
+.include /home/vlsilab/UG_students_2018/t14y_tsmc_025_level3.txt
+
+M1000 n1 A vdd vdd cmosp w=16u l=3u
++  ad=384p pd=80u as=102p ps=70u
+M1001 or_out B n1 vdd cmosp w=16u l=3u
++  ad=56p pd=42u as=0p ps=0u
+M1002 out or_out vdd vdd cmosp w=6u l=3u
++  ad=54p pd=30u as=0p ps=0u
+M1003 gnd A or_out Gnd cmosn w=3u l=3u
++  ad=104p pd=80u as=41p ps=38u
+M1004 or_out B gnd Gnd cmosn w=3u l=3u
++  ad=0p pd=0u as=0p ps=0u
+M1005 out or_out gnd Gnd cmosn w=3u l=3u
++  ad=34p pd=28u as=0p ps=0u
+
+C0 or_out vdd 7.55fF
+C1 A vdd 4.32fF
+C2 B vdd 4.32fF
+C3 gnd Gnd 7.90fF
+C4 or_out Gnd 16.05fF
+C5 B Gnd 7.17fF
+C6 A Gnd 7.17fF
+
+v_dd vdd 0 5
+gd gnd 0 0 
+
+v_ina A 0 PULSE(0 5 0 0.1n 0.1n 50n 100n)
+v_inb B 0 PULSE(0 5 0 0.1n 0.1n 40n 80n)
+
+
+.control
+tran 0.1n 300n
+run
+plot (out) (0.25*A) (0.5*B)
+.endc
+
+.end

@@ -1,0 +1,58 @@
+timestamp 1520967412
+version 8.1
+tech scmos
+style lambda=1.0(scna20_orb)
+scale 1000 1 100
+resistclasses 26670 59550 23860 19690 27260 2000000 49 26 2505830
+node "n4" 84 0 176 8 ndiff 114 50 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "n3" 84 0 122 8 ndiff 114 50 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "n2" 84 0 66 8 ndiff 114 50 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "n1" 84 0 12 8 ndiff 114 50 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "gnd" 586 38634 -44 8 ndc 289 166 0 0 0 0 0 0 0 0 0 0 914 612 0 0 0 0
+node "q" 1025 14699 110 45 pdiff 48 28 108 60 116 114 0 0 0 0 0 0 309 214 141 98 0 0
+node "out_n2" 1025 19674 54 45 pdiff 48 28 108 60 116 114 0 0 0 0 0 0 391 268 215 148 0 0
+node "q_bar" 1025 15411 138 29 pc 48 28 108 60 116 114 0 0 0 0 0 0 310 214 209 144 0 0
+node "out_n1" 1025 17188 0 45 pdiff 48 28 108 60 116 114 0 0 0 0 0 0 366 252 248 170 0 0
+node "D_bar" 1012 17937 -27 8 ndiff 67 50 120 52 116 114 0 0 0 0 0 0 198 140 278 190 0 0
+node "en" 1289 18932 28 29 pc 0 0 0 0 232 228 0 0 0 0 0 0 82 64 113 80 0 0
+node "D" 1289 19341 -31 29 pc 0 0 0 0 228 226 0 0 0 0 0 0 79 62 95 68 0 0
+node "vdd" 41935 41736 -46 38 nw 64 64 546 242 0 0 0 0 0 0 0 0 1242 828 0 0 5460 628
+cap "en" "vdd" 7148
+cap "q_bar" "q" 879
+cap "vdd" "out_n2" 9214
+cap "vdd" "D" 7148
+cap "en" "out_n2" 180
+cap "out_n1" "D_bar" 443
+cap "vdd" "q_bar" 9214
+cap "vdd" "D_bar" 4561
+cap "en" "D_bar" 228
+cap "q_bar" "out_n2" 813
+cap "out_n1" "q" 180
+cap "D_bar" "out_n2" 180
+cap "D" "D_bar" 519
+cap "vdd" "q" 9214
+cap "out_n2" "q" 519
+cap "vdd" "out_n1" 9993
+cap "en" "out_n1" 1028
+cap "out_n1" "out_n2" 3624
+cap "D" "out_n1" 180
+device mosfet nfet 195 8 196 9 2 6 "Gnd!" "q" 4 0 "n4" 6 0 "q_bar" 6 0
+device mosfet nfet 174 8 175 9 2 6 "Gnd!" "out_n2" 4 0 "gnd" 6 0 "n4" 6 0
+device mosfet nfet 141 8 142 9 2 6 "Gnd!" "q_bar" 4 0 "n3" 6 0 "q" 6 0
+device mosfet nfet 120 8 121 9 2 6 "Gnd!" "out_n1" 4 0 "gnd" 6 0 "n3" 6 0
+device mosfet nfet 85 8 86 9 2 6 "Gnd!" "D_bar" 4 0 "n2" 6 0 "out_n2" 6 0
+device mosfet nfet 64 8 65 9 2 6 "Gnd!" "en" 4 0 "gnd" 6 0 "n2" 6 0
+device mosfet nfet 31 8 32 9 2 6 "Gnd!" "en" 4 0 "n1" 6 0 "out_n1" 6 0
+device mosfet nfet 10 8 11 9 2 6 "Gnd!" "D" 4 0 "gnd" 6 0 "n1" 6 0
+device mosfet nfet -29 8 -28 9 2 3 "Gnd!" "D" 4 0 "gnd" 3 0 "D_bar" 3 0
+device mosfet pfet 195 45 196 46 2 6 "vdd" "q" 4 0 "vdd" 6 0 "q_bar" 6 0
+device mosfet pfet 174 45 175 46 2 6 "vdd" "out_n2" 4 0 "q_bar" 6 0 "vdd" 6 0
+device mosfet pfet 141 45 142 46 2 6 "vdd" "q_bar" 4 0 "vdd" 6 0 "q" 6 0
+device mosfet pfet 120 45 121 46 2 6 "vdd" "out_n1" 4 0 "q" 6 0 "vdd" 6 0
+device mosfet pfet 85 45 86 46 2 6 "vdd" "D_bar" 4 0 "vdd" 6 0 "out_n2" 6 0
+device mosfet pfet 64 45 65 46 2 6 "vdd" "en" 4 0 "out_n2" 6 0 "vdd" 6 0
+device mosfet pfet 31 45 32 46 2 6 "vdd" "en" 4 0 "vdd" 6 0 "out_n1" 6 0
+device mosfet pfet 10 45 11 46 2 6 "vdd" "D" 4 0 "out_n1" 6 0 "vdd" 6 0
+device mosfet pfet -29 45 -28 46 2 6 "vdd" "D" 4 0 "vdd" 6 0 "D_bar" 6 0
+subcap "en" -13617
+subcap "q_bar" -7611

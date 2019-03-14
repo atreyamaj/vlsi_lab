@@ -1,0 +1,61 @@
+* to study XOR gate
+
+.include /home/vlsilab/UG_students_2018/t14y_tsmc_025_level3.txt
+
+
+* Inverter for NOTing A
+M_in_a_p out_ina ina vdd vdd cmosp l=1u w=1u
+M_in_a_n out_ina ina 0 0 cmosn l=1u w=1u
+
+* Inverter for NOTing B
+M_in_b_p out_inb inb vdd vdd cmosp l=1u w=1u
+M_in_b_n out_inb inb 0 0 cmosn l=1u w=1u
+
+* Inverter for NOTing output
+M_in_o_p out out_xinv vdd vdd cmosp l=1u w=1u
+M_in_o_n out out_xinv 0 0 cmosn l=1u w=1u
+
+* Main inverted XOR
+
+M1 n1 ina vdd vdd cmosp l=1u w=1u
+M2 n1 out_inb vdd vdd cmosp l=1u w=1u
+M3 out_xinv out_ina n1 vdd cmosp l=1u w=1u
+M4 out_xinv inb n1 vdd cmosp l=1u w=1u
+M5 out_xinv ina n2 0 cmosn l=1u w=1u
+M6 out_xinv out_ina n3 0 cmosn l=1u w=1u
+M7 n2 out_inb 0 0 cmosn l=1u w=1u
+M8 n3 inb 0 0 cmosn l=1u w=1u
+
+* Voltages
+
+v_dd vdd 0 5
+v_a ina 0 0
+v_b inb 0 0
+v_a ina 0 PULSE(0 5 0s 0ns 0.0ns 3ns 6ns)
+
+v_b inb 0 PULSE(0 5 0s 0ns 0ns 1ns 2ns)
+
+
+
+
+*Trnsfer
+.control
+*foreach wid 0.1u 1u 10u 100u
+*alter Mp1 w = $wid
+*alter Mp2 w = $wid
+tran 0.01ns 20ns
+*dc v_a 0 5 0.1
+run
+ 
+*end
+
+*run
+*plot out deriv(out)
+plot ina inb out 
+*plot dc1.out deriv(dc1.out) dc2.out deriv(dc2.out) dc3.out deriv(dc3.out) dc4.out deriv(dc4.out)
+*plot tran1.out tran2.out tran3.out tran4.out
+*meas tran yavg AVG i(v_dd) from=0ns to from= 
+*plot (out) (vdd*(-v_dd#branch))
+*plot 
+.endc
+.end

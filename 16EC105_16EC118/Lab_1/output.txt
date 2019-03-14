@@ -1,5 +1,5 @@
 Title: * nmos charecteristics varying vsb(vbb)
-Date: Mon Jan  7 22:12:46  2019
+Date: Sun Feb 17 19:34:53  2019
 Plotname: DC transfer characteristic
 Flags: real
 No. Variables: 7
