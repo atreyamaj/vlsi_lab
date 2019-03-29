@@ -1,21 +1,20 @@
-timestamp 1552322164
-version 8.1
+timestamp 1552322522
+version 8.0
 tech scmos
 style lambda=1.0(scna20_orb)
 scale 1000 1 100
 resistclasses 26670 59550 23860 19690 27260 2000000 49 26 2505830
 node "a_4_0#" 53 0 4 0 ndiff 18 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 node "Gnd" 65 3948 -5 -1 ndc 25 22 0 0 0 0 0 0 0 0 0 0 100 68 0 0 0 0
-node "InA" 347 6777 10 -2 p 0 0 0 0 87 76 0 0 0 0 0 0 16 16 0 0 0 0
+node "InA" 323 6777 10 -2 p 0 0 0 0 83 72 0 0 0 0 0 0 16 16 0 0 0 0
 node "Out" 188 1269 4 13 pdiff 25 22 22 20 0 0 0 0 0 0 0 0 89 64 0 0 0 0
-node "InB" 261 3808 -1 6 pc 0 0 0 0 56 54 0 0 0 0 0 0 16 16 0 0 0 0
-node "Vdd" 7159 0 -5 11 nw 16 16 50 44 0 0 0 0 0 0 0 0 160 98 0 0 384 88
-cap "InA" "Out" 720
-cap "InB" "Vdd" 1908
+node "InB" 237 3808 -1 6 pc 0 0 0 0 52 50 0 0 0 0 0 0 16 16 0 0 0 0
+node "Vdd" 7443 0 -6 11 nw 16 16 50 44 0 0 0 0 0 0 0 0 160 98 0 0 394 90
+cap "InB" "Vdd" 1432
 cap "Out" "Vdd" 282
-cap "InA" "Vdd" 1908
+cap "Out" "InA" 720
+cap "InA" "Vdd" 1432
 device mosfet nfet 10 0 11 1 2 3 "Gnd!" "InA" 4 0 "a_4_0#" 3 0 "Out" 3 0
 device mosfet nfet 2 0 3 1 2 3 "Gnd!" "InB" 4 0 "Gnd" 3 0 "a_4_0#" 3 0
 device mosfet pfet 10 13 11 14 2 3 "Vdd" "InA" 4 0 "Out" 3 0 "Vdd" 3 0
 device mosfet pfet 2 13 3 14 2 3 "Vdd" "InB" 4 0 "Vdd" 3 0 "Out" 3 0
-subcap "InA" -632
