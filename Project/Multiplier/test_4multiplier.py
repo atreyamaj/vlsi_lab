@@ -1,6 +1,7 @@
 import os
 import time
 import sys
+
 if(len(sys.argv)<2):
     print("Error")
 
@@ -10,13 +11,11 @@ sim_file = sys.argv[1]
 logfile = "output.log"
 
 in1_vector = "a_3 a_2 a_1 a_0"
-in2_vector = "b_3 B_2 b_1 b_0"
-in3_vector = "cin"
-out = "cout s_3 s_2 s_1 s_0"
+in2_vector = "b_3 b_2 b_1 b_0"
+out = "p_7 p_6 p_5 p_4 p_3 p_2 p_1 p_0"
 counter = 0
 def evaluate(eachline):
     global counter
-    cin_txt = eachline[eachline.find('cin')+4]
     a_0_txt = eachline[eachline.find('a_0')+4] 
     a_1_txt = eachline[eachline.find('a_1')+4] 
     a_2_txt = eachline[eachline.find('a_2')+4]
@@ -25,33 +24,35 @@ def evaluate(eachline):
     b_1_txt = eachline[eachline.find('b_1')+4]
     b_2_txt = eachline[eachline.find('b_2')+4]
     b_3_txt = eachline[eachline.find('b_3')+4]
-    s_0_txt = eachline[eachline.find('s_0')+4]
-    s_1_txt = eachline[eachline.find('s_1')+4]
-    s_2_txt = eachline[eachline.find('s_2')+4]
-    s_3_txt = eachline[eachline.find('s_3')+4]
-    cout_txt = eachline[eachline.find('cout')+5]
-    cin = int(cin_txt,2)
+    p_0_txt = eachline[eachline.find('p_0')+4]
+    p_1_txt = eachline[eachline.find('p_1')+4]
+    p_2_txt = eachline[eachline.find('p_2')+4]
+    p_3_txt = eachline[eachline.find('p_3')+4]
+    p_4_txt = eachline[eachline.find('p_4')+4]
+    p_5_txt = eachline[eachline.find('p_5')+4]
+    p_6_txt = eachline[eachline.find('p_6')+4]
+    p_7_txt = eachline[eachline.find('p_7')+4]
     a = int(a_3_txt+a_2_txt+a_1_txt+a_0_txt,2)
     b = int(b_3_txt+b_2_txt+b_1_txt+b_0_txt,2)
-    result = int(cout_txt+s_3_txt+s_2_txt+s_1_txt+s_0_txt,2)
-    sum_ab = a+b+cin
-    if(result!=sum_ab):
+    result = int(p_7_txt+p_6_txt+p_5_txt+p_4_txt+p_3_txt+p_2_txt+p_1_txt+p_0_txt,2)
+    product = int(a*b)
+    if(result!=product):
         print("*************************")
         print("Error")
-        print(str(a)+"+"+ str(b) + "+" + str(cin))
+        print(str(a)+"*"+str(b)+ " failed")
         print("*************************")
         sys.exit()
     else:
-        print(str(a) + "+" + str(b) + "+" + str(cin) + "=" + str(sum_ab))
+        print(str(a) + "*" + str(b) + "=" + str(product))
         counter = counter + 1
 
 with open(cmdfile,"w") as file:
     file.write("logfile "+ logfile +"\n")
-    file.write("w " + out + " " + in1_vector + " "+ in2_vector + " " + in3_vector + "\n")
-    file.write("vector In "+ in1_vector + " "+ in2_vector + " " + in3_vector + "\n")
+    file.write("w " + out + " " + in1_vector + " "+ in2_vector + "\n")
+    file.write("vector In "+ in1_vector + " "+ in2_vector + "\n")
     file.write("set vlist {")
-    for i in range(0,2**9,1):
-        file.write(str(bin(i)[2:].zfill(9)) + " ")
+    for i in range(0,2**8,1):
+        file.write(str(bin(i)[2:].zfill(8)) + " ")
     file.write("}\n")
     file.write("foreach vec $vlist {setvector in $vec ; s}\n")
     file.write("logfile\n")
