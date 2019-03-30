@@ -2,8 +2,8 @@ import os
 import time
 import sys
 
-if(len(sys.argv)<2):
-    print("Error")
+if(len(sys.argv)==2):
+    print("Error. Please provide the .sim file as command line argument")
 
 cmdfile = "test_file.cmd"
 #sim_file = "fulladder_4bit.sim"
@@ -52,7 +52,7 @@ def evaluate(eachline):
 with open(cmdfile,"w") as file:
     file.write("logfile "+ logfile +"\n")
     #file.write("vsupply 3.3")
-    file.write("stepsize 15\n")
+    file.write("stepsize 13\n")
     file.write("w " + out + " " + in1_vector + " "+ in2_vector + "\n")
     file.write("vector In "+ in1_vector + " "+ in2_vector + "\n")
     file.write("set vlist {")
