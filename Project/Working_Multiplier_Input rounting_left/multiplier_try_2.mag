@@ -1,6 +1,6 @@
 magic
 tech scmos
-timestamp 1553892382
+timestamp 1553935034
 << rotate >>
 rect 154 157 165 159
 rect 421 157 432 159
@@ -12910,7 +12910,6 @@ rlabel alu1 797 146 797 146 1 Vdd
 rlabel alu1 771 146 771 146 1 Vdd
 rlabel alu1 666 74 666 74 5 gnd
 rlabel alu1 748 74 748 74 5 gnd
-rlabel alu1 833 40 833 40 5 cout
 rlabel alu1 748 82 748 82 1 gnd
 rlabel alu1 666 82 666 82 1 gnd
 rlabel alu1 598 146 598 146 4 vdd
@@ -12923,10 +12922,10 @@ rlabel via1 590 248 590 248 1 b_3
 rlabel via1 582 175 582 175 1 b_3
 rlabel via1 590 106 590 106 1 b_3
 rlabel via1 582 34 582 34 1 b_3
-rlabel alu2 833 39 833 39 1 p_7
 rlabel alu1 792 46 792 46 1 p_6
 rlabel alu1 792 115 792 115 1 p_5
 rlabel alu1 792 190 792 190 1 p_4
 rlabel alu1 792 259 792 259 1 p_3
 rlabel alu1 525 259 525 259 1 p_2
+rlabel alu1 832 49 832 49 1 p_7
 << end >>
