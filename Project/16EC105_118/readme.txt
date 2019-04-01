@@ -1,4 +1,4 @@
-4 bit Arithmetic Unit - EC371 VLSI Design Lab Project
+4 bit Arithmetic Unit - EC372 VLSI Design Lab Project
 Done by:
 16EC105 - Anirudh BH
 16EC118 - Manan Sharma

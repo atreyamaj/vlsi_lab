@@ -1,9 +1,0 @@
-* SPICE3 file created from not_wid.ext - technology: scmos
-
-M1000 out in vdd vdd pfet w=8u l=2u
-+  ad=36p pd=28u as=36p ps=28u
-M1001 out in gnd Gnd nfet w=8u l=2u
-+  ad=32p pd=26u as=32p ps=26u
-C0 gnd Gnd 2.58fF
-C1 in Gnd 3.49fF
-C2 vdd Gnd 2.73fF

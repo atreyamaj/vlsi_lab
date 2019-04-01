@@ -1,0 +1,22 @@
+* SPICE3 file created from xnr2v0x05.ext - technology: scmos
+
+.option scale=0.01u
+
+M1000 vdd b bn vdd pmos w=66 l=11
++  ad=10345.5 pd=638 as=2178 ps=209
+M1001 an a vdd vdd pmos w=66 l=11
++  ad=2904 pd=220 as=0 ps=0
+M1002 z b an vdd pmos w=66 l=11
++  ad=3811.5 pd=286 as=0 ps=0
+M1003 a_44_47# bn z vdd pmos w=99 l=11
++  ad=2722.5 pd=253 as=0 ps=0
+M1004 vdd an a_44_47# vdd pmos w=99 l=11
++  ad=0 pd=0 as=0 ps=0
+M1005 vss b bn vss nmos w=33 l=11
++  ad=3267 pd=264 as=2722.5 ps=297
+M1006 an a vss vss nmos w=33 l=11
++  ad=1452 pd=154 as=0 ps=0
+M1007 z bn an vss nmos w=33 l=11
++  ad=1452 pd=154 as=0 ps=0
+M1008 bn an z vss nmos w=33 l=11
++  ad=0 pd=0 as=0 ps=0
