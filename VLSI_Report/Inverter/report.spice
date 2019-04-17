@@ -1,0 +1,57 @@
+* SPICE3 file created from report.ext - technology: scmos
+
+.option scale=1u
+
+.include ./t14y_tsmc_025_level3.txt
+
+M1000 out in Vdd Vdd cmosp w=6 l=2
++  ad=28 pd=22 as=28 ps=22
+M1001 out in Gnd Gnd cmosn w=3 l=2
++  ad=19 pd=18 as=19 ps=18
+C0 in measure 4.0fF
+
+
+* source
+vdd Vdd 0 dc 3.3
+vin in 0 dc 3.3 pulse(0 3.3 0 1n 1n 0.5m 1m)
+vcap measure 0 dc 0
+
+
+.control
+
+dc vin 0 3.3 0.001
+
+meas dc voh find out when in=0.002
+meas dc vol find out when in=3.299
+let slope=deriv(out)
+
+meas dc vih find in when slope=-1 cross=2
+meas dc vil find in when slope=-1 cross=1
+
+let v90 = voh-0.1*(voh-vol)
+let v10 = vol+0.1*(voh-vol)
+let vhalf = voh-0.5*(voh-vol)
+let NMH = voh - vih
+let NML = vil - vol
+
+tran 0.1m 2m
+plot in out
+meas tran trise trig out val=dc.v10 rise=1 targ out val=dc.v90 rise=1
+meas tran tfall trig out val=dc.v90 fall=1 targ out val=dc.v10 fall=1
+
+meas tran tlh trig in val=1.65 fall=1 targ out val=dc.vhalf rise=1
+meas tran thl trig in val=1.65 rise=1 targ out val=dc.vhalf fall=1
+let td = 0.5*(thl+tlh)
+print td
+
+let power = -3.3*vdd#branch
+meas tran pavg AVG power from=0m to=2m 
+let pcap = 3.3*abs(vcap#branch)
+meas tran pdyn AVG pcap from=0m to=2m
+
+setplot dc1
+plot out
+plot deriv(out)
+.endc
+
+.end
