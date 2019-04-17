@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[english]{babel}
+\usepackage[margin=1in]{geometry}
 \usepackage{url}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -15,11 +16,11 @@
 \usepackage{titlesec}
 \usepackage{amssymb}
 \lstset{basicstyle = \ttfamily}
-\usepackage{vmargin}
+%\usepackage{vmargin}
 \usepackage{float}
 \usepackage{pdfpages,caption,geometry}
 \usepackage[hidelinks]{hyperref}
-\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+%\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
 %\setcounter{secnumdepth}{0}         % Removes Section Numbering
 \title{VLSI Lab Report}								% Title
 \author{\begin{tabular}[t]{l l} 
@@ -50,7 +51,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Anirudh BH, Manan Sharma}
+\rhead{}
 \lhead{VLSI Lab Report}
 \cfoot{\thepage}
 
@@ -79,7 +80,7 @@
 	\pagebreak
 	
 	\section{Study of MOS Inverter with Resistive Load}
-	
+	\rhead{Study of MOS Inverter with Resistive Load}
 	\subsection{Objective}
 	To study the:
 	\begin{enumerate}
@@ -115,13 +116,37 @@
     vcap meas 0 dc 0
     \end{lstlisting}
     
-    \subsection{Analysis and Observations}
+    \subsection{Simulation Results, Analysis and Observations}
     
     Transfer characteristics were plotted for different values of $\text{R}_\text{L}$ and different W and L values for the driver NMOS. The plots obtained were as follows:
     
     The curves moving to the right imply that the threshold voltage is increasing and moving to the right. Figure(\ref{fig::varying_rl_dc}) indicates that as $\text{R}_\text{L}$ increases the voltage drop across it increases. This implies that the graph moves to the left as $\text{R}_\text{L}$ increases.\\
     Figure(\ref{fig::varying_rl_time}) indicates that as $\text{R}_\text{L}$ increases the pull up resistance to the load increases. This results in the rise time increasing for an increase in $\text{R}_\text{L}$.\\
-    Figure(\ref{fig::varying_rl_vcap}) indicates that as $\text{R}_\text{L}$. increases the peak current drawn by the capacitor decreases. Figure(\ref{fig::varying_rl_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same.
+    Figure(\ref{fig::varying_rl_vcap}) indicates that as $\text{R}_\text{L}$. increases the peak current drawn by the capacitor decreases. Figure(\ref{fig::varying_rl_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same. Table \ref{table::tablevaryrl} contains the changes in both DC and Transient parameters.
+    \begin{table}[H]
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+    	\hline 
+    	\rule[-1ex]{0pt}{2.5ex} Resistance & 5k$\Omega$ & 7k$\Omega$ & 10k$\Omega$  \\ 
+    	\hline 
+    	\rule[-1ex]{0pt}{2.5ex} $\text{V}_\text{OH}$ & 3.3V & 3.3V & 3.3V \\ 
+    	$\text{V}_\text{OL}$ & 0.347V & 0.248V & 0.173V \\ 
+    	$\text{V}_\text{IL}$ & 0.661V & 0.583V & 0.528V \\ 
+    	 $\text{V}_\text{IH}$ & 1.768V & 1.572V & 1.39V \\ 
+    	$\text{NM}_\text{H}$ & 1.532V & 1.728V & 1.91V \\ 
+    	 $\text{NM}_\text{L}$ & 0.314V & 0.335V & 0.355V \\ 
+    	$\text{t}_\text{rise}$ & 51.83$\mu$s & 73.6$\mu$s & 0.109ms \\ 
+    	$\text{t}_\text{fall}$ & 10$\mu$s & 9.935$\mu$s & 9.691$\mu$s \\ 
+    	$\text{t}_\text{PLH}$ & 17.9$\mu$s & 24.97$\mu$s & 34.6$\mu$s \\ 
+    	$\text{t}_\text{PHL}$ & 4.417$\mu$s & 4.43$\mu$s & 4.455$\mu$s \\ 
+    	$\text{t}_\text{d}$ & 11.15$\mu$s & 14.7$\mu$s & 19.52$\mu$s \\ 
+    	$\text{P}_\text{avg}$ & 1.01mW  & 0.762mW & 0.561mW \\ 
+    	\hline 
+    \end{tabular} 
+	\end{center}
+	\caption{Effect of varying $\text{R}_\text{L}$ on various DC and Transient Parameters}
+	\label{table::tablevaryrl}
+	\end{table}
     \begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_Rl_dc.png}
@@ -148,14 +173,38 @@
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_Rl_vdd.png}
-			\caption{Transient Response Varying $\text{R}_\text{L}$}
+			\caption{$\text{I}_{DS}$ on Varying $\text{R}_\text{L}$}
 			\label{fig::varying_rl_vdd}
 		\end{center}
 	\end{figure}
 	
 	Figure(\ref{fig::varying_w_dc}) indicates that as W increases the voltage drop across the load $\text{R}_\text{L}$ increases. This implies that the graph moves to the left as W increases.\\
     Figure(\ref{fig::varying_w_time}) indicates that as W increases the pull-down resistance to the ground decreases. This results in the rise time decreaseing for an increase in W.\\
-    Figure(\ref{fig::varying_w_vcap}) indicates that as W increases the peak current drawn by the capacitor increases. Figure(\ref{fig::varying_w_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same.
+    Figure(\ref{fig::varying_w_vcap}) indicates that as W increases the peak current drawn by the capacitor increases. Figure(\ref{fig::varying_w_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same. Table \ref{table::tablevaryw} contains the changes in both DC and Transient parameters.
+    \begin{table}[H]
+    	\begin{center}
+    		\begin{tabular}{|c|c|c|c|}
+    			\hline 
+    			\rule[-1ex]{0pt}{2.5ex} W & 5$\mu$ & 10$\mu$ & 20$\mu$  \\ 
+    			\hline 
+    			\rule[-1ex]{0pt}{2.5ex} $\text{V}_\text{OH}$ & 3.3V & 3.3V & 3.3V \\ 
+    			 $\text{V}_\text{OL}$ & 0.497V & 0.248V & 0.123V \\ 
+    			 $\text{V}_\text{IL}$ & 0.791V & 0.58V & 0.493V \\ 
+    			 $\text{V}_\text{IH}$ & 2V & 1.57V & 1.24V \\ 
+    			 $\text{NM}_\text{H}$ & 1.3V & 1.73V & 2.06V \\ 
+    			 $\text{NM}_\text{L}$ & 0.294V & 0.332V & 0.37V \\ 
+    			 $\text{t}_\text{rise}$ & 75.21$\mu$s & 73.64$\mu$s & 72.45$\mu$s \\ 
+    			 $\text{t}_\text{fall}$ & 20.02$\mu$s & 9.935$\mu$s & 4.82$\mu$s \\ 
+    			 $\text{t}_\text{PLH}$ & 24.81$\mu$s & 24.97$\mu$s & 25.15$\mu$s \\ 
+    			 $\text{t}_\text{PHL}$ & 8.56$\mu$s & 4.43$\mu$s & 2.22$\mu$s \\ 
+    			 $\text{t}_\text{d}$ & 16.685$\mu$s & 14.4$\mu$s & 13.685$\mu$s \\ 
+    			 $\text{P}_\text{avg}$ & 0.693mW  & 0.762mW & 0.797mW \\ 
+    			\hline 
+    		\end{tabular} 
+    	\end{center}
+    	\caption{Effect of varying W on various DC and Transient Parameters}
+    	\label{table::tablevaryw}
+    \end{table}
     \begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_w_dc.png}
@@ -166,7 +215,7 @@
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_w_tran.png}
-			\caption{Transient Response Varying W}
+			\caption{$\text{I}_{DS}$ on Varying W}
 			\label{fig::varying_w_time}
 		\end{center}
 	\end{figure}
@@ -190,7 +239,31 @@
 	
 	Figure(\ref{fig::varying_l_dc}) indicates that as L increases, the current decreases and the voltage drop across the load $\text{R}_\text{L}$ decreases. This implies that the graph moves to the right as L increases.\\
     Figure(\ref{fig::varying_l_time}) indicates that as L increases the pull-down resistance to the ground increases. This results in the rise time increasing for an increase in L.\\
-    Figure(\ref{fig::varying_l_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same.
+    Figure(\ref{fig::varying_l_vdd}) indicates that the current drawn from $\text{V}_{\text{DD}}$ is the same. Table \ref{table::tablevaryl} contains the changes in both DC and Transient parameters.
+    \begin{table}[H]
+    	\begin{center}
+    		\begin{tabular}{|c|c|c|c|}
+    			\hline 
+    			\rule[-1ex]{0pt}{2.5ex} L & 1$\mu$ & 2.5$\mu$ & 10$\mu$  \\ 
+    			\hline 
+    			\rule[-1ex]{0pt}{2.5ex} $\text{V}_\text{OH}$ & 3.3V & 3.3V & 3.3V \\ 
+    			 $\text{V}_\text{OL}$ & 0.1V & 0.248V & 0.9V \\ 
+    			 $\text{V}_\text{IL}$ & 0.455V & 0.583V & 1.24V \\ 
+    			 $\text{V}_\text{IH}$ & 1.18V & 1.57V & 2.34V \\ 
+    			 $\text{NM}_\text{H}$ & 2.12V & 1.73V & 0.96V \\ 
+    			 $\text{NM}_\text{L}$ & 0.355V & 0.335V & 0.34V \\ 
+    			 $\text{t}_\text{rise}$ & 74.31$\mu$s & 73.64$\mu$s & 78.28$\mu$s \\ 
+    			 $\text{t}_\text{fall}$ & 4.89$\mu$s & 9.935$\mu$s & 32.62$\mu$s \\ 
+    			 $\text{t}_\text{PLH}$ & 25.15$\mu$s & 24.97$\mu$s & 24.209$\mu$s \\ 
+    			 $\text{t}_\text{PHL}$ & 2.32$\mu$s & 4.43$\mu$s & 12.79$\mu$s \\ 
+    			 $\text{t}_\text{d}$ & 13.73$\mu$s & 14.7$\mu$s & 18.499$\mu$s \\ 
+    			 $\text{P}_\text{avg}$ & 0.803mW  & 0.762mW & 0.587mW \\ 
+    			\hline 
+    		\end{tabular} 
+    	\end{center}
+    	\caption{Effect of varying L on various DC and Transient Parameters}
+    	\label{table::tablevaryl}
+    \end{table}
     \begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_l_dc.png}
@@ -213,22 +286,72 @@
 			\label{fig::varying_l_vcap}
 		\end{center}
 	\end{figure}
-	
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25]{images/inverter_l_vdd.png}
-			\caption{Transient Response Varying L}
+			\caption{$\text{I}_{DS}$ on Varying L}
 			\label{fig::varying_l_vdd}
 		\end{center}
 	\end{figure}
+	On varying $\text{C}_\text{L}$, no variation in DC parameters($\text{NM}_\text{H}$, $\text{NM}_\text{L}$) is observed, asthey are indepenedent of the load capactiance. Whereas for transient parameters, we observe that as $\text{C}_\text{L}$ increases, the rise time and fall time increase, as a larger value of capacitance takes more time to charge and discharge. Table \ref{table::tablevarcl} contains the changes in both DC and Transient parameters.
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline 
+				\rule[-1ex]{0pt}{2.5ex} $\text{C}_\text{L}$ & 0.1nF & 20nF\\ 
+				\hline 
+				\rule[-1ex]{0pt}{2.5ex} 
+				$\text{V}_\text{OH}$ & 3.3V & 3.3V  \\ 
+				$\text{V}_\text{OL}$ & 0.2481V & 0.2481V \\ 
+				$\text{V}_\text{IL}$ & 0.583V & 0.583V \\ 
+				$\text{V}_\text{IH}$ & 1.57V & 1.572V \\ 
+				$\text{NM}_\text{H}$ & 1.728V & 1.728V\\ 
+				$\text{NM}_\text{L}$ & 0.3349V & 0.3349V \\ 
+				$\text{t}_\text{rise}$ & 1.55$\mu$s & 0.302ms\\ 
+				$\text{t}_\text{fall}$ & 0.193$\mu$s & 39.86$\mu$s\\ 
+				$\text{t}_\text{PLH}$ & 0.501$\mu$s & 99.77$\mu$s\\ 
+				$\text{t}_\text{PHL}$ & 87.72ns & 18.08$\mu$s\\ 
+				$\text{t}_\text{d}$ & 0.294$\mu$s & 58.85$\mu$s\\ 
+				$\text{P}_\text{avg}$ & 0.702mW  & 0.8862mW\\ 
+				\hline 
+			\end{tabular} 
+		\end{center}
+		\caption{Effect of varying $\text{C}_\text{L}$ on various DC and Transient Parameters}
+		\label{table::tablevarcl}
+	\end{table}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.25]{images/inverter_cl_tran.png}
+			\caption{Transient Response Varying $\text{C}_\text{L}$}
+			\label{fig::varying_cl_tran}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.25]{images/inverter_cl_vdd.png}
+			\caption{$\text{I}_{DS}$ on Varying $\text{C}_\text{L}$}
+			\label{fig::varying_cl_vdd}
+		\end{center}
+	\end{figure}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.25]{images/inverter_cl_vcap.png}
+			\caption{Capacitor current on Varying $\text{C}_\text{L}$}
+			\label{fig::varying_cl_vcap}
+		\end{center}
+	\end{figure}
+
+	
+	
 	
     
     
     \newpage
 	\section{CMOS Inverter Layout and Characterisation} 
-	
+	\rhead{CMOS Inverter Layout and Characterisation}
 	\subsection{Aim}
-	
+	To learn layout, extract, LVS and characterization processes in the design flow with CMOS inverter as example, and to compute parametrs such as input capactiance, output capacitance, rise time and fall time for various loads.
 	\subsection{Circuit Diagram}
 	\begin{figure}[H]
 		\begin{center}
@@ -250,9 +373,23 @@
 		\end{center}
 	\end{figure}
 	
-	\subsection{Netlist}
+	\subsection{Extracted Netlist}
+	\begin{lstlisting}
+	M1000 out in Vdd Vdd cmosp w=6 l=2
+	+  ad=28 pd=22 as=28 ps=22
+	M1001 out in Gnd Gnd cmosn w=3 l=2
+	+  ad=19 pd=18 as=19 ps=18
+	C0 in Gnd 4.0fF
+	C1 out Gnd 2.07fF
+	\end{lstlisting}
 	
 	\subsection{Analysis and Observation}
+	Area of the inverter cell = 504 microns 
+	\par Input capacitance = 4fF
+	\par Output capacitance = 2.07fF
+	\par Sum of all nodal capacitances = 0.02540pF
+	
+	The DC transfer characteristics is shown in Figure(\ref{fig::layout_dc}). 
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale = 0.2]{images/layout_dc.png}
@@ -268,6 +405,31 @@
 			\label{fig::layout_tran}
 		\end{center}
 	\end{figure}
-	
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|}
+				\hline 
+				\rule[-1ex]{0pt}{2.5ex} $\text{C}_\text{L}$ & 5nF & 20nF & 50nF \\ 
+				\hline 
+				\rule[-1ex]{0pt}{2.5ex}
+				$\text{t}_\text{rise}$ & 56.61$\mu$s & 0.223ms & - \\ 
+				$\text{t}_\text{fall}$ & 26.64$\mu$s & 0.107ms & 0.25805ms \\ 
+				$\text{t}_\text{PLH}$ & 26.3$\mu$s & 0.1045ms & 0.2568ms \\ 
+				$\text{t}_\text{PHL}$ & 12.77$\mu$s & 0.0109ms & 0.1262ms \\ 
+				$\text{t}_\text{d}$ & 19.55$\mu$s & 0.07781ms & 0.191ms \\ 
+				$\text{P}_\text{avg}$ & 54.45$\mu$W  & 0.2173mW & 0.449mW \\ 
+				$\text{P}_\text{dynamic}$ & 0.111mW  & 0.435mW & 0.946mW \\ 
+				\hline $\text{V}_\text{OH}$ &\multicolumn{3}{|c|}{3.3V}\\ 
+				$\text{V}_\text{OL}$ & \multicolumn{3}{|c|}{4.83nV} \\ 
+				$\text{V}_\text{IL}$ & \multicolumn{3}{|c|}{1.0034V} \\ 
+				$\text{V}_\text{IH}$ & \multicolumn{3}{|c|}{1.4996V} \\ 
+				$\text{NM}_\text{H}$ & \multicolumn{3}{|c|}{1.8003V} \\ 
+				$\text{NM}_\text{L}$ & \multicolumn{3}{|c|}{1.0034V}\\ 
+				\hline 
+			\end{tabular} 
+		\end{center}
+		\caption{Effect of varying $\text{C}_\text{L}$ on various DC and Transient Parameters}
+		\label{table::tablevarycllayout}
+	\end{table}
 	
 \end{document}

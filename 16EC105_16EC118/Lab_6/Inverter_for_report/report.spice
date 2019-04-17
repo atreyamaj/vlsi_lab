@@ -36,7 +36,8 @@ let v10 = vol+0.1*(voh-vol)
 let vhalf = voh-0.5*(voh-vol)
 let NMH = voh - vih
 let NML = vil - vol
-
+print NMH
+print NML
 tran 0.1m 2m
 plot in out
 meas tran trise trig out val=dc.v10 rise=1 targ out val=dc.v90 rise=1
